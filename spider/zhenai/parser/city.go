@@ -5,7 +5,7 @@ import (
 	"regexp"
 )
 
-const cityRe = `<a href="(http://album.zhenai.com/u/[0-9]+)"[^>]*>([^<]+)</a>`;
+const cityRe = `<a href="http://album.zhenai.com/u/([0-9]+)"[^>]*>([^<]+)</a>`; //个人用户profile url
 
 func ParseCity(contents []byte) engine.ParseResult  {
 	re := regexp.MustCompile(cityRe)
@@ -15,8 +15,8 @@ func ParseCity(contents []byte) engine.ParseResult  {
 	for _, m := range matchs{
 		result.Items = append(result.Items,string(m[2]))
 		result.Reuqests = append(result.Reuqests,engine.Request{
-			Url:string(m[1]),
-			ParserFunc: engine.NilParser,
+			Url: "http://m.zhenai.com/u/" + string(m[1]), //pc版的跑不通
+			ParserFunc: ParseProfile,
 		})
 	}
 	return result

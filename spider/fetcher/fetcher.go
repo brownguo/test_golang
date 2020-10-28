@@ -14,17 +14,23 @@ import (
 )
 
 func Fetch(url string) ([]byte,error)  {
-	resp, err := http.Get(url)
+	client := &http.Client{}
+	request, err := http.NewRequest("GET", url, nil)
+	request.Header.Set("user-agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36")
 	if err != nil{
 		panic(err)
 	}
-	defer resp.Body.Close()
-	if resp.StatusCode != http.StatusOK{
-		return nil,fmt.Errorf("wrong status code:%d",resp.StatusCode)
+
+	response, _ := client.Do(request)
+
+	defer response.Body.Close()
+
+	if response.StatusCode != http.StatusOK{
+		return nil,fmt.Errorf(" 1wrong status code:%d",response.StatusCode)
 	}
 	//转码
-	e := determineEncoding(resp.Body)
-	utf8Reader := transform.NewReader(resp.Body,e.NewDecoder())
+	e := determineEncoding(response.Body)
+	utf8Reader := transform.NewReader(response.Body,e.NewDecoder())
 	return ioutil.ReadAll(utf8Reader)
 }
 

@@ -12,15 +12,11 @@ func Run (seeds ...Request)  {
 		requests = append(requests,r)
 	}
 
-	//fmt.Println(reflect.TypeOf(requests))
-	//return
-
 	for len(requests) > 0 {
 		r := requests[0]
 		requests = requests[1:]
 		body, err := fetcher.Fetch(r.Url)
 		log.Printf("Url:%s",r.Url)
-
 		if err != nil{
 			log.Printf("Fetcher:error fetching url %s:%v",r.Url,err)
 			continue
@@ -31,6 +27,5 @@ func Run (seeds ...Request)  {
 		for _,item := range ParseResult.Items{
 			log.Printf("Got item %v",item)
 		}
-
 	}
 }
