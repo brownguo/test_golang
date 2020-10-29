@@ -7,7 +7,7 @@ import (
 
 func main() {
 	url := "https://www.zhenai.com/zhenghun"  //城市列表页面
-	engine.Run(engine.Request{
+	engine.SimpleEngine{}.Run(engine.Request{
 		Url: url,
 		ParserFunc: parser.ParseCityList,
 	})

@@ -14,7 +14,7 @@ func ParseCity(contents []byte) engine.ParseResult  {
 
 	for _, m := range matchs{
 		name := string(m[2])
-		result.Items = append(result.Items,string(m[2]))
+		result.Items = append(result.Items,name)
 		result.Reuqests = append(result.Reuqests,engine.Request{
 			Url: "http://m.zhenai.com/u/" + string(m[1]), //pc版的跑不通
 			ParserFunc: func(c []byte) engine.ParseResult {

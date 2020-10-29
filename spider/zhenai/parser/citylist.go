@@ -13,7 +13,7 @@ func ParseCityList(contents []byte) engine.ParseResult{
 	matchs := re.FindAllSubmatch(contents,-1)
 	result := engine.ParseResult{}
 
-	limit := 6
+	limit := 3   //先拿6页，要不然太多了。
 
 	for _, m := range matchs{
 		result.Items = append(result.Items,string(m[2])) //城市名字
