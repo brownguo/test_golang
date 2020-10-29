@@ -5,7 +5,7 @@ import (
 	"regexp"
 )
 
-const cityListRe = `<a href="(http://www.zhenai.com/zhenghun/[0-9a-z]+)"[^>]*>([^<]+)</a>`
+const cityListRe = `<a href="(http://www.zhenai.com/zhenghun/[0-9a-z]+)"[^>]*>([^<]+)</a>`  //城市列表
 
 func ParseCityList(contents []byte) engine.ParseResult{
 
@@ -13,7 +13,7 @@ func ParseCityList(contents []byte) engine.ParseResult{
 	matchs := re.FindAllSubmatch(contents,-1)
 	result := engine.ParseResult{}
 
-	limit := 2
+	limit := 6
 
 	for _, m := range matchs{
 		result.Items = append(result.Items,string(m[2])) //城市名字
