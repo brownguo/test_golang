@@ -11,9 +11,11 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"time"
 )
-
+var rateLimit = time.Tick(10 * time.Millisecond)
 func Fetch(url string) ([]byte,error)  {
+	<- rateLimit //间隔100毫秒拿一次
 	client := &http.Client{}
 	request, err := http.NewRequest("GET", url, nil)
 	request.Header.Set("user-agent","Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36")
