@@ -6,16 +6,15 @@ import (
 )
 
 func main() {
-	//var s [10]int
+	var s [3]int
 
-	for i := 0; i < 10; i++ {
+	for i := 0; i < 3; i++ {
 		go func(flag int) {
 			for  {
-				//s[flag] ++
+				s[flag] ++
 				fmt.Printf("Hello form goroutine:%d \n",flag)
 			}
 		}(i)
 	}
-	time.Sleep(time.Microsecond)
-	//fmt.Println(s)
+	time.Sleep(100 * time.Microsecond)
 }

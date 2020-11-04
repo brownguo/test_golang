@@ -12,6 +12,7 @@ func main() {
 	//	Url: url,
 	//	ParserFunc: parser.ParseCityList,
 	//})
+
 	e := engine.ConcurrentEngine{
 		Scheduler: &scheduler.SimpleScheduler{},
 		WorkerCount: 100,
